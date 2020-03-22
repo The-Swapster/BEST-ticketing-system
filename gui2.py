@@ -1,5 +1,5 @@
 from tkinter import *
-import database as db
+import database_1 as db
 import sqlite3
 t=Tk()
 t.title("Conductor UI")
