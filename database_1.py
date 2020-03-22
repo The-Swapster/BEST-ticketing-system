@@ -69,6 +69,9 @@ def data_entries_bus_stop():
     c.execute("insert into bus_stop(name, route_number) values('10th Road Chembur Church', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('Dr. Ambedkar Garden', 'C6Exp')")
     connection.commit()
+    c.close()
+    connection.close()
+
     
 
 def data_entries_passenger(start,stop):
@@ -82,5 +85,3 @@ data_entries_bus()
 data_entries_seats()
 data_entries_bus_stop()
 '''
-c.close()
-connection.close()
