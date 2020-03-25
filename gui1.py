@@ -1,6 +1,7 @@
-import tkinter as tk
+from tkinter import *
 import database as db
 import sqlite3
+
 
 spl1 = [
     "Mumbai CST",
@@ -34,9 +35,7 @@ spl1 = [
     "Dr. Ambedkar Garden"
 ]
 
-
-def show_entry_fields(v1, v2, a):
-    t = tk.Tk()
+'''def show_entry_fields(v1, v2, a):
     t.title("Ticket details")
     s = ''
     for i in range(a):
@@ -46,34 +45,81 @@ def show_entry_fields(v1, v2, a):
         r = db.c.fetchone()
         s += "Bus Number:" + str(r[0]) + "\nRoute Number: " + str(r[1]) + "\nTicket Id :" + str(
             r[2]) + "\nStart Stop: " + str(r[3]) + "\nEnd Stop: " + str(r[4]) + "\nType: " + str(r[5]) + "\n\n"
-    tk.Label(t, text=s).grid(row=0, column=0)
-    t.mainloop()
+    Label(t, text=s).grid(row=0, column=0)
+    t.mainloop()'''
 
-
-def call_gui1():
-    root = tk.Tk()
-    root.geometry("325x200")
-    root.title("Choose Bus")
-    counter = tk.IntVar(root)
-    variable = tk.StringVar(root)
+'''def call_gui1():
+    t.geometry("325x200")
+    t.title("Choose Bus")
+    counter = IntVar(t)
+    variable = StringVar(t)
     variable.set(spl1[0])
-    variable1 = tk.StringVar(root)
+    variable1 = StringVar(t)
     variable1.set(spl1[0])
-    button1 = tk.Button(text='Submit', command=show_entry_fields(variable.get(), variable1.get(), counter.get()))
+    button1 = Button(text='Submit', command=show_entry_fields(variable.get(), variable1.get(), counter.get()))
     button1.grid(row=8, column=1, pady=4)
-    text3 = tk.Label(root, text="Source")
-    text4 = tk.Label(root, text="Destination")
-    text5 = tk.Label(root, text="Number of people")
-    w = tk.OptionMenu(root, variable, *spl1)
+    text3 = Label(t, text="Source")
+    text4 = Label(t, text="Destination")
+    text5 = Label(t, text="Number of people")
+    w = OptionMenu(t, variable, *spl1)
     w.grid(row=0, column=4)
-    x = tk.OptionMenu(root, variable1, *spl1)
+    x = OptionMenu(t, variable1, *spl1)
     x.grid(row=1, column=4)
     text3.grid(row=0, column=0)
     text4.grid(row=1, column=0)
     text5.grid(row=2, column=0)
-    tk.Label(root, text="Number of people").grid(row=2, column=0)
-    tk.Label(root, textvariable=counter).grid(row=2, column=5)
-    tk.Button(root, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
-    tk.Button(root, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
+    Label(t, text="Number of people").grid(row=2, column=0)
+    Label(t, textvariable=counter).grid(row=2, column=5)
+    Button(t, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
+    Button(t, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
 
-    root.mainloop()
+    t.mainloop()'''
+
+
+class Gui:
+    def __init__(self):
+        self.t = Tk()
+
+    def show_entry_fields(self, v1, v2, a):
+        self.t.title("Ticket details")
+        s = ''
+        for i in range(a):
+            l = db.data_entries_passenger(v1, v2)
+            a = "Select * from passenger where ticket_id = ?"
+            db.c.execute(a, (l,))
+            r = db.c.fetchone()
+            s += "Bus Number:" + str(r[0]) + "\nRoute Number: " + str(r[1]) + "\nTicket Id :" + str(
+                r[2]) + "\nStart Stop: " + str(r[3]) + "\nEnd Stop: " + str(r[4]) + "\nType: " + str(r[5]) + "\n\n"
+        Label(self.t, text=s).grid(row=0, column=0)
+        self.t.mainloop()
+
+    def call_gui1(self):
+        self.t.geometry("325x200")
+        self.t.title("Choose Bus")
+        counter = IntVar(self.t)
+        variable = StringVar(self.t)
+        variable.set(spl1[0])
+        variable1 = StringVar(self.t)
+        variable1.set(spl1[0])
+        button1 = Button(text='Submit', command=self.show_entry_fields(variable.get(), variable1.get(), counter.get()))
+        button1.grid(row=8, column=1, pady=4)
+        text3 = Label(self.t, text="Source")
+        text4 = Label(self.t, text="Destination")
+        text5 = Label(self.t, text="Number of people")
+        w = OptionMenu(self.t, variable, *spl1)
+        w.grid(row=0, column=4)
+        x = OptionMenu(self.t, variable1, *spl1)
+        x.grid(row=1, column=4)
+        text3.grid(row=0, column=0)
+        text4.grid(row=1, column=0)
+        text5.grid(row=2, column=0)
+        Label(self.t, text="Number of people").grid(row=2, column=0)
+        Label(self.t, textvariable=counter).grid(row=2, column=5)
+        Button(self.t, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
+        Button(self.t, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
+
+        self.t.mainloop()
+
+
+g = Gui()
+g.call_gui1()
