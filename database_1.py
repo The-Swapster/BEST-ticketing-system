@@ -1,7 +1,7 @@
 import sqlite3
 import random
-
-id = random.randint(100, 1000)
+global id1
+id1 = random.randint(100, 1000)
 connection = sqlite3.connect('BEST.db')
 c = connection.cursor()
 
@@ -103,14 +103,16 @@ def data_entries_bus_stop():
     c.execute("insert into bus_stop(name, route_number) values('Acharya Gardendiamond Garden', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('10th Road Chembur Church', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('Dr. Ambedkar Garden', 'C6Exp')")
-    #connection.commit()
-    #c.close()
-    #connection.close()
+    connection.commit()
+    c.close()
+    connection.close()
 
 def data_entries_passenger(start, stop):
-    id += 1
-    c.execute("Insert into passenger(ticket_id,start_stop,end_stop) values(?,?,?)", (id, start, stop))
-    #connection.commit()
+    id1 += 1
+    connection = sqlite3.connect('BEST.db')
+    c = connection.cursor()
+    c.execute("Insert into passenger(ticket_id,start_stop,end_stop) values(?,?,?)", (id1, start, stop))
+    connection.commit()
     return id
 
 def calls():
@@ -118,4 +120,5 @@ def calls():
     data_entries_bus()
     data_entries_seats()
     data_entries_bus_stop()
+
 
