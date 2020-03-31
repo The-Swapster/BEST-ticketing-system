@@ -1,7 +1,6 @@
 from tkinter import *
 import database as db
-import sqlite3
-
+import gui3
 
 spl1 = [
     "Mumbai CST",
@@ -35,6 +34,37 @@ spl1 = [
     "Dr. Ambedkar Garden"
 ]
 
+def call_gui1():
+    t1 = Tk()
+    #t1.geometry("325x200")
+    t1.title("Choose Bus")
+    counter = IntVar(t1)
+    variable = StringVar(t1)
+    variable.set(spl1[0])
+    variable1 = StringVar(t1)
+    variable1.set(spl1[0])
+    text3 = Label(t1, text="Source")
+    text4 = Label(t1, text="Destination")
+    text5 = Label(t1, text="Number of people")
+    w = OptionMenu(t1, variable, *spl1)
+    w.grid(row=0, column=4)
+    x = OptionMenu(t1, variable1, *spl1)
+    x.grid(row=1, column=4)
+    text3.grid(row=0, column=0)
+    text4.grid(row=1, column=0)
+    text5.grid(row=2, column=0)
+    Label(t1, text="Number of people").grid(row=2, column=0)
+    Label(t1, textvariable=counter).grid(row=2, column=5)
+    Button(t1, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
+    Button(t1, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
+    button1 = Button(t1, text='Submit', command=gui3.show_entry_fields(variable.get(), variable1.get(), counter.get()))
+    print(variable.get(), variable1.get(), counter.get())
+    button1.grid(row=8, column=1, pady=4)
+    #t.mainloop()
+
+
+#call_gui1()
+
 '''def show_entry_fields(v1, v2, a):
     t.title("Ticket details")
     s = ''
@@ -45,10 +75,11 @@ spl1 = [
         r = db.c.fetchone()
         s += "Bus Number:" + str(r[0]) + "\nRoute Number: " + str(r[1]) + "\nTicket Id :" + str(
             r[2]) + "\nStart Stop: " + str(r[3]) + "\nEnd Stop: " + str(r[4]) + "\nType: " + str(r[5]) + "\n\n"
-    Label(t, text=s).grid(row=0, column=0)
-    t.mainloop()'''
+    Label(t, text=s).grid(row=0, column=0)'''
+
 
 '''def call_gui1():
+
     t.geometry("325x200")
     t.title("Choose Bus")
     counter = IntVar(t)
@@ -56,7 +87,7 @@ spl1 = [
     variable.set(spl1[0])
     variable1 = StringVar(t)
     variable1.set(spl1[0])
-    button1 = Button(text='Submit', command=show_entry_fields(variable.get(), variable1.get(), counter.get()))
+    button1 = Button(text='Submit', command=gui3.show_entry_fields(variable.get(), variable1.get(), counter.get()))
     button1.grid(row=8, column=1, pady=4)
     text3 = Label(t, text="Source")
     text4 = Label(t, text="Destination")
@@ -73,10 +104,9 @@ spl1 = [
     Button(t, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
     Button(t, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
 
-    t.mainloop()'''
-
-
-class Gui:
+    t.mainloop()
+call_gui1()'''
+'''class Gui:
     def __init__(self):
         self.t = Tk()
 
@@ -91,7 +121,7 @@ class Gui:
             s += "Bus Number:" + str(r[0]) + "\nRoute Number: " + str(r[1]) + "\nTicket Id :" + str(
                 r[2]) + "\nStart Stop: " + str(r[3]) + "\nEnd Stop: " + str(r[4]) + "\nType: " + str(r[5]) + "\n\n"
         Label(self.t, text=s).grid(row=0, column=0)
-        self.t.mainloop()
+        # self.t.mainloop()
 
     def call_gui1(self):
         self.t.geometry("325x200")
@@ -118,8 +148,8 @@ class Gui:
         Button(self.t, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
         Button(self.t, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
 
-        self.t.mainloop()
+        # self.t.mainloop()
 
 
-g = Gui()
-g.call_gui1()
+#g = Gui()
+#g.call_gui1()'''
