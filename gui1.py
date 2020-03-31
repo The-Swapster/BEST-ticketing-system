@@ -1,6 +1,7 @@
 from tkinter import *
 import database as db
 import gui3
+from functools import partial
 
 spl1 = [
     "Mumbai CST",
@@ -57,11 +58,25 @@ def call_gui1():
     Label(t1, textvariable=counter).grid(row=2, column=5)
     Button(t1, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
     Button(t1, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
-    button1 = Button(t1, text='Submit', command=gui3.show_entry_fields(variable.get(), variable1.get(), counter.get()))
-    print(variable.get(), variable1.get(), counter.get())
+    #d = partial(display, variable.get(), variable1.get(), counter.get())
+    #button1 = Button(t1, text='Submit', command=d)
+    button1 = Button(t1, text='Submit', command=lambda:gui3.show_entry_fields(variable.get(), variable1.get(), counter.get()))
+    #print(variable.get(), variable1.get(), counter.get())
     button1.grid(row=8, column=1, pady=4)
     #t.mainloop()
 
+def display(v, v1, c):
+    print(v, v1, c)
+    s = ''
+    for i in range(int(c)):
+        l = db.data_entries_passenger(v, v1)
+        print(v, v1, a)
+        a = "Select * from passenger where ticket_id = ?"
+        db.c.execute(a, (l,))
+        r = db.c.fetchone()
+        s += "Bus Number:" + str(r[0]) + "\nRoute Number: " + str(r[1]) + "\nTicket Id :" + str(
+            r[2]) + "\nStart Stop: " + str(r[3]) + "\nEnd Stop: " + str(r[4]) + "\nType: " + str(r[5]) + "\n\n"
+        print(s)
 
 #call_gui1()
 
