@@ -22,5 +22,3 @@ try:
 
 except sqlite3.IntegrityError:
     gui()
-
-
