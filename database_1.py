@@ -1,7 +1,7 @@
 import sqlite3
 import random
-global id1
-id1 = random.randint(100, 1000)
+#global id1
+#id1 = random.randint(100, 1000)
 connection = sqlite3.connect('BEST.db')
 c = connection.cursor()
 
@@ -18,7 +18,7 @@ def create_table():
         'route_number), foreign key(route_number) references bus(route_number))')
     c.execute(
         'create table if not exists passenger(bus_number text, route_number text, ticket_id real primary key, '
-        'start_stop text, end_stop text, type text, foreign key(bus_number) references bus(bus_number), foreign key('
+        'start_stop text, end_stop text, number text, foreign key(bus_number) references bus(bus_number), foreign key('
         'route_number) references bus(route_number))')
     c.execute(
         'create table if not exists bus_status(bus_number text unique, current_location text, passenger_count real, '
@@ -104,16 +104,17 @@ def data_entries_bus_stop():
     c.execute("insert into bus_stop(name, route_number) values('10th Road Chembur Church', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('Dr. Ambedkar Garden', 'C6Exp')")
     connection.commit()
-    c.close()
-    connection.close()
+    #c.close()
+    #connection.close()
 
-def data_entries_passenger(start, stop):
-    id1 += 1
-    connection = sqlite3.connect('BEST.db')
-    c = connection.cursor()
-    c.execute("Insert into passenger(ticket_id,start_stop,end_stop) values(?,?,?)", (id1, start, stop))
-    connection.commit()
-    return id
+'''def data_entries_passenger(start, stop):
+    id1 = random.randint(100, 1000)
+    #print(start, stop)
+    connection1 = sqlite3.connect('BEST.db')
+    c1 = connection1.cursor()
+    c1.execute("Insert into passenger(ticket_id,start_stop,end_stop) values(?,?,?)", (id1, start, stop))
+    connection1.commit()
+    return id'''
 
 def calls():
     create_table()
