@@ -1,6 +1,7 @@
 from tkinter import *
 import database as db
 import sqlite3
+from functools import partial
 
 stops1Spl = [
     "Mumbai CST",
@@ -18,7 +19,7 @@ stopsC6Exp = [
     "Colaba",
     "Dr S P Mukherji Chowk Museum",
     "Lions Gate",
-    "'Old Custom House",
+    "Old Custom House",
     "RBI Fort",
     "Swami D Saraswati Chowk Fort",
     "Carnac Bander",
@@ -41,7 +42,6 @@ stopsC6Exp = [
     "Dr. Ambedkar Garden"
 ]
 
-route_no = ['1 SPL', 'C6Exp']
 
 spl1 = ["MH01CD1234",
         "MH01XY6754",
@@ -60,33 +60,54 @@ C6Exp = ["MH01RM5018",
 
 def update_status(i1, i2):
     try:
-        db.c.execute('Insert into bus_status(bus_number,current_location) Values(?,?)', (i1, i2))
-    except sqlite3.IntegrityError :
+        db.c.execute('Insert into bus_status(route_number, bus_number,current_location) Values(?,?,?)', (i1, i2))
+        db.c.execute('delete from passenger where end_stop = ?', (i2,))
+    except sqlite3.IntegrityError:
         db.c.execute('update bus_status set current_location = ? where bus_number = ?', (i2, i1))
 
 
-def call_gui2():
+
+def func1(v):
+    func1.a = v
+    print(func1.a)
+    #return a
+
+
+def call_gui2(v):
     t2 = Tk()
     t2.title("Conductor UI")
     v1 = StringVar(t2)
     v2 = StringVar(t2)
-    v3 = StringVar(t2)
-    Label(t2, text="Route Number").grid(row=0, column=0)
+    #Label(t2, text="Route Number").grid(row=0, column=0)
     Label(t2, text="Bus Number").grid(row=1, column=0)
     Label(t2, text="Current location").grid(row=2, column=0)
-    w3 = OptionMenu(t2, v3, *route_no)
-    w3.grid(row=0, column=1)
-    print(v3)
-    if v3.get() == "C6Exp":
+    #b = Button(t2, text='Next', command=lambda: a.set(v3.get()))
+    #print(a.get())
+    #w3.grid(row=0, column=1)
+    #b.grid(row=0, column=2)
+    #print(func1.a)
+    if v == "C6Exp":
         w1 = OptionMenu(t2, v1, *stopsC6Exp)
-        w1.grid(row=1, column=1)
+        w1.grid(row=2, column=1)
         w2 = OptionMenu(t2, v2, *C6Exp)
-        w2.grid(row=2, column=1)
-    elif v3.get() == "1 SPL":
+        w2.grid(row=1, column=1)
+    elif v == "1 SPL":
         w1 = OptionMenu(t2, v1, *stops1Spl)
-        w1.grid(row=1, column=1)
+        w1.grid(row=2, column=1)
         w2 = OptionMenu(t2, v2, *spl1)
-        w2.grid(row=2, column=1)
-    b1 = Button(t2, text="Submit", command=update_status(v1.get(), v2.get()))
+        w2.grid(row=1, column=1)
+    b1 = Button(t2, text="Submit", command=lambda :update_status(v, v1.get(), v2.get()))
     b1.grid(row=3, column=1)
     t2.mainloop()
+
+'''def func(v):
+    if v == "C6Exp":
+        w1 = OptionMenu(t2, v, *stopsC6Exp)
+        w1.grid(row=1, column=1)
+        w2 = OptionMenu(t2, v, *C6Exp)
+        w2.grid(row=2, column=1)
+    elif v == "1 SPL":
+        w1 = OptionMenu(t2, v, *stops1Spl)
+        w1.grid(row=1, column=1)
+        w2 = OptionMenu(t2, v, *spl1)
+        w2.grid(row=2, column=1)'''
