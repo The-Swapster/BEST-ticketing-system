@@ -2,8 +2,14 @@ from tkinter import *
 import database as db
 import gui3
 from functools import partial
-
-spl1 = [
+Spl1 = [
+    "Mumbai CST",
+    "Hutatma Chowk",
+    "Ahilyabai Holkar Chowk",
+    "Mantralay",
+    "NCPA"
+]
+C6Exp = [
     "Mumbai CST",
     "Hutatma Chowk",
     "Ahilyabai Holkar Chowk",
@@ -35,35 +41,62 @@ spl1 = [
     "Dr. Ambedkar Garden"
 ]
 
-def call_gui1():
+def call_gui1(v):
     t1 = Tk()
     #t1.geometry("325x200")
     t1.title("Choose Bus")
-    counter = IntVar(t1)
-    variable = StringVar(t1)
-    variable.set(spl1[0])
-    variable1 = StringVar(t1)
-    variable1.set(spl1[0])
-    text3 = Label(t1, text="Source")
-    text4 = Label(t1, text="Destination")
-    text5 = Label(t1, text="Number of people")
-    w = OptionMenu(t1, variable, *spl1)
-    w.grid(row=0, column=4)
-    x = OptionMenu(t1, variable1, *spl1)
-    x.grid(row=1, column=4)
-    text3.grid(row=0, column=0)
-    text4.grid(row=1, column=0)
-    text5.grid(row=2, column=0)
-    Label(t1, text="Number of people").grid(row=2, column=0)
-    Label(t1, textvariable=counter).grid(row=2, column=5)
-    Button(t1, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
-    Button(t1, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
-    #d = partial(display, variable.get(), variable1.get(), counter.get())
-    #button1 = Button(t1, text='Submit', command=d)
-    button1 = Button(t1, text='Submit', command=lambda:gui3.show_entry_fields(variable.get(), variable1.get(), counter.get()))
-    #print(variable.get(), variable1.get(), counter.get())
-    button1.grid(row=8, column=1, pady=4)
-    #t.mainloop()
+    if v == '1 SPL':
+        counter = IntVar(t1)
+        variable = StringVar(t1)
+        variable.set(Spl1[0])
+        variable1 = StringVar(t1)
+        variable1.set(Spl1[0])
+        text3 = Label(t1, text="Source")
+        text4 = Label(t1, text="Destination")
+        text5 = Label(t1, text="Number of people")
+        w = OptionMenu(t1, variable, *Spl1)
+        w.grid(row=0, column=4)
+        x = OptionMenu(t1, variable1, *Spl1)
+        x.grid(row=1, column=4)
+        text3.grid(row=0, column=0)
+        text4.grid(row=1, column=0)
+        text5.grid(row=2, column=0)
+        Label(t1, text="Number of people").grid(row=2, column=0)
+        Label(t1, textvariable=counter).grid(row=2, column=5)
+        Button(t1, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
+        Button(t1, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
+        #d = partial(display, variable.get(), variable1.get(), counter.get())
+        #button1 = Button(t1, text='Submit', command=d)
+        button1 = Button(t1, text='Submit', command=lambda:gui3.show_entry_fields(variable.get(), variable1.get(), counter.get(), v))
+        #print(variable.get(), variable1.get(), counter.get())
+        button1.grid(row=8, column=1, pady=4)
+    elif v == 'C6Exp':
+        counter = IntVar(t1)
+        variable = StringVar(t1)
+        variable.set(C6Exp[0])
+        variable1 = StringVar(t1)
+        variable1.set(C6Exp[0])
+        text3 = Label(t1, text="Source")
+        text4 = Label(t1, text="Destination")
+        text5 = Label(t1, text="Number of people")
+        w = OptionMenu(t1, variable, *C6Exp)
+        w.grid(row=0, column=4)
+        x = OptionMenu(t1, variable1, *C6Exp)
+        x.grid(row=1, column=4)
+        text3.grid(row=0, column=0)
+        text4.grid(row=1, column=0)
+        text5.grid(row=2, column=0)
+        Label(t1, text="Number of people").grid(row=2, column=0)
+        Label(t1, textvariable=counter).grid(row=2, column=5)
+        Button(t1, text="+", command=lambda: counter.set(counter.get() + 1)).grid(row=2, column=6)
+        Button(t1, text="-", command=lambda: counter.set(counter.get() - 1)).grid(row=2, column=4)
+        # d = partial(display, variable.get(), variable1.get(), counter.get())
+        # button1 = Button(t1, text='Submit', command=d)
+        button1 = Button(t1, text='Submit',
+                         command=lambda: gui3.show_entry_fields(variable.get(), variable1.get(), counter.get(), v))
+        # print(variable.get(), variable1.get(), counter.get())
+        button1.grid(row=8, column=1, pady=4)
+
 
 def display(v, v1, c):
     print(v, v1, c)
