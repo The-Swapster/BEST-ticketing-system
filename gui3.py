@@ -42,6 +42,7 @@ def show_entry_fields(v1, v2, a, v):
     #l = db.data_entries_passenger(v1, v2)
     #print(v1, v2, a)"
     db.c.execute('Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number) Values(?,?,?,?,?,?)', (d, v, v1, v2, j, a))
+    db.connection.commit()
     #a = "Select * from passenger where ticket_id = ?"
     #db.c.execute(a, (i,))
     #r = db.c.fetchone()
