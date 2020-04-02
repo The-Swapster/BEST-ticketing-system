@@ -103,6 +103,8 @@ def call_gui2(v):
         w2.grid(row=1, column=1)
     b1 = Button(t2, text="Submit", command=lambda :update_status(v, v1.get(), v2.get()))
     b1.grid(row=3, column=1)
+    b2 = Button(t2, text="Close", command=t2.destroy)
+    b2.grid(row=3, column=3)
     t2.mainloop()
 
 '''def func(v):
