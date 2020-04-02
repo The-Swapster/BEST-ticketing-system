@@ -60,10 +60,14 @@ C6Exp = ["MH01RM5018",
 
 def update_status(i1, i2):
     try:
-        db.c.execute('Insert into bus_status(route_number, bus_number,current_location) Values(?,?,?)', (i1, i2))
+        db.c.execute('Insert into bus_status(bus_number,current_location) Values(?,?)', (i1, i2))
         db.c.execute('delete from passenger where end_stop = ?', (i2,))
+        db.connection.commit()
     except sqlite3.IntegrityError:
         db.c.execute('update bus_status set current_location = ? where bus_number = ?', (i2, i1))
+        db.connection.commit()
+    finally:
+        m.showinfo('Update succesful','The current location of the bus has been successfully updated')
 
 
 
