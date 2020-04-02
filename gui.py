@@ -12,6 +12,8 @@ def gui(v1):
     b1.grid(row=0)
     b2 = Button(t, text='Passenger', command=lambda :gui1.call_gui1(v1))
     b2.grid(row=1)
+    b3 = Button(t, text='Close', command=t.destroy)
+    b3.grid(row=2)
     #t.mainloop()
 
 
