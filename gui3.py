@@ -36,7 +36,7 @@ def show_entry_fields(v1, v2, a, v):
     t3.title("Ticket details")
     s = ''
     d = bus_number(v)
-    print(v1, v2, a, v)
+    #print(v1, v2, a, v)
     #for i in range(int(a)):
     j += 1
     #l = db.data_entries_passenger(v1, v2)
