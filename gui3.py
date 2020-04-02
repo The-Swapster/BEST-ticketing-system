@@ -52,4 +52,6 @@ def show_entry_fields(v1, v2, a, v):
     s += "Bus Number: " + str(d) + "\nRoute Number: " + str(v) + "\nTicket Id: "+ str(j) + "\nStart Stop: "+str(v1)+"\nEnd Stop: "+str(v2)+"\nNumber: "+str(a)+"\n\n"
     l1 = Label(t3, text=s)
     l1.grid(row=0, column=0)
+    b1 = Button(t3, text='Close', command=t3.destroy)
+    b1.grid(row=1)
     #t3.mainloop()
