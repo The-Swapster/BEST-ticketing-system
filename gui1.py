@@ -96,6 +96,8 @@ def call_gui1(v):
                          command=lambda: gui3.show_entry_fields(variable.get(), variable1.get(), counter.get(), v))
         # print(variable.get(), variable1.get(), counter.get())
         button1.grid(row=8, column=1, pady=4)
+    b2=Button(t1,text='Close', command=t1.destroy )
+    b2.grid(row=8, column=3) 
 
 
 def display(v, v1, c):
