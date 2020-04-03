@@ -1,7 +1,4 @@
 import sqlite3
-import random
-#global id1
-#id1 = random.randint(100, 1000)
 connection = sqlite3.connect('BEST.db')
 c = connection.cursor()
 
@@ -18,13 +15,13 @@ def create_table():
         'route_number), foreign key(route_number) references bus(route_number))')
     c.execute(
         'create table if not exists passenger(bus_number text, route_number text, ticket_id real primary key, '
-        'start_stop text, end_stop text, number text, foreign key(bus_number) references bus(bus_number), foreign key('
-        'route_number) references bus(route_number))')
+        'start_stop text, end_stop text, number real, price real, foreign key(bus_number) references bus(bus_number), '
+        'foreign key(route_number) references bus(route_number))')
     c.execute(
         'create table if not exists bus_status(bus_number text unique, current_location text, passenger_count real, '
-        'available_seats real, foreign key(bus_number) references bus(bus_number))')
+        'foreign key(bus_number) references bus(bus_number))') 
     c.execute(
-        'create table if not exists passenger_count(bus_number text, standing real, sitting real, foreign key('
+        'create table if not exists passenger_count(bus_number text unique, count real, foreign key('
         'bus_number) references bus(bus_number))')
 
 
@@ -103,23 +100,23 @@ def data_entries_bus_stop():
     c.execute("insert into bus_stop(name, route_number) values('Acharya Gardendiamond Garden', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('10th Road Chembur Church', 'C6Exp')")
     c.execute("insert into bus_stop(name, route_number) values('Dr. Ambedkar Garden', 'C6Exp')")
-    connection.commit()
-    #c.close()
-    #connection.close()
 
-'''def data_entries_passenger(start, stop):
-    id1 = random.randint(100, 1000)
-    #print(start, stop)
-    connection1 = sqlite3.connect('BEST.db')
-    c1 = connection1.cursor()
-    c1.execute("Insert into passenger(ticket_id,start_stop,end_stop) values(?,?,?)", (id1, start, stop))
-    connection1.commit()
-    return id'''
+def data_passenger_count():
+    c.execute("insert into passenger_count values('MH01CD1234', '0')")
+    c.execute("insert into passenger_count values('MH01XY6754', '0')")
+    c.execute("insert into passenger_count values('MH01MD3245', '0')")
+    c.execute("insert into passenger_count values('MH01AB3848', '0')")
+    c.execute("insert into passenger_count values('MH01BA5707', '0')")
+    c.execute("insert into passenger_count values('MH01RM5018', '0')")
+    c.execute("insert into passenger_count values('MH01UA6550', '0')")
+    c.execute("insert into passenger_count values('MH01SA7745', '0')")
+    c.execute("insert into passenger_count values('MH01ZM8199', '0')")
+    c.execute("insert into passenger_count values('MH01DG1860', '0')")
+    connection.commit()
 
 def calls():
     create_table()
     data_entries_bus()
     data_entries_seats()
     data_entries_bus_stop()
-
-
+    data_passenger_count()
