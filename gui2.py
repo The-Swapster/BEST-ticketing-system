@@ -2,6 +2,11 @@ from tkinter import *
 import tkinter.font as tkfont
 import database as db
 import sqlite3
+import webbrowser
+
+
+def open(url):
+    webbrowser.open_new(url)
 
 stops1Spl = [
     "Mumbai CST",
@@ -80,30 +85,34 @@ def update_status(v, v1, v2):
 
 
 def call_gui2(v):
-    t2 = Tk()
+    t2 = Toplevel()
     t2.title("Conductor UI")
     f = tkfont.Font(family='Sans Serif', size=12)
     v1 = StringVar(t2)
     v2 = StringVar(t2)
-    Label(t2, text="Bus Number", font=f, bg='red3', fg='white').grid(row=1, column=0, padx=30, pady=30, ipadx=15)
-    Label(t2, text="Current location", font=f, bg='red3', fg='white').grid(row=2, column=0, padx=30, pady=30)
+    img = PhotoImage(file='best_1.png')
+    b3 = Button(t2, image=img, command=lambda: open("https://www.bestundertaking.com/in/iis6954.asp?lang=en"))
+    Button.image = img
+    b3.grid(row=0)
+    Label(t2, text="Bus Number", font=f, bg='red3', fg='white').grid(row=1, column=1, padx=30, pady=30, ipadx=15)
+    Label(t2, text="Current location", font=f, bg='red3', fg='white').grid(row=2, column=1, padx=30, pady=30)
     if v == "C6Exp":
         v2.set(stopsC6Exp[0])
         w1 = OptionMenu(t2, v2, *stopsC6Exp)
         w1.config(font=f, bg='red3', fg='white')
-        w1.grid(row=2, column=2)
+        w1.grid(row=2, column=3)
         v1.set(C6Exp[0])
         w2 = OptionMenu(t2, v1, *C6Exp)
         w2.config(font=f, bg='red3', fg='white')
-        w2.grid(row=1, column=2)
+        w2.grid(row=1, column=3)
     elif v == "1 SPL":
         v2.set(stops1Spl[0])
         w1 = OptionMenu(t2, v2, *stops1Spl)
         w1.config(font=f, bg='red3', fg='white')
-        w1.grid(row=2, column=2, ipadx=5)
+        w1.grid(row=2, column=3, ipadx=5)
         v1.set(spl1[0])
         w2 = OptionMenu(t2, v1, *spl1)
         w2.config(font=f, bg='red3', fg='white')
-        w2.grid(row=1, column=2)
+        w2.grid(row=1, column=3)
     b1 = Button(t2, text="Submit", font=f, bg='red3', fg='white', command=lambda: update_status(v, v1.get(), v2.get()))
-    b1.grid(row=3, column=1, padx=30, pady=30, ipadx=45)
+    b1.grid(row=3, column=2, padx=30, pady=30, ipadx=45)
