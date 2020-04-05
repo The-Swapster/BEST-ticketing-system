@@ -19,7 +19,7 @@ def create_table():
         'foreign key(route_number) references bus(route_number))')
     c.execute(
         'create table if not exists bus_status(bus_number text unique, current_location text, passenger_count real, '
-        'foreign key(bus_number) references bus(bus_number))') 
+        'foreign key(bus_number) references bus(bus_number))')
     c.execute(
         'create table if not exists passenger_count(bus_number text unique, count real, foreign key('
         'bus_number) references bus(bus_number))')
@@ -120,3 +120,5 @@ def calls():
     data_entries_seats()
     data_entries_bus_stop()
     data_passenger_count()
+
+
