@@ -301,12 +301,14 @@ def bus_number(v, a, v1, v2, p):
 
 
 def show_entry_fields(v1, v2, a, v):
-    t3 = Tk()
+    t3 = Toplevel()
     t3.title("Ticket details")
+    img = PhotoImage(file='best2.png')
     f = tkfont.Font(family='Consolas', size=12)
     p = price(v, a, v1, v2)
     s = bus_number(v, a, v1, v2, p)
-    l1 = Label(t3, text=s, font=f)
+    l1 = Label(t3, text=s, compound=CENTER, image=img, font=f)
+    l1.image = img
     l1.grid(row=0, column=0)
 
 
