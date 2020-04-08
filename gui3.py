@@ -4,6 +4,10 @@ import random
 from datetime import datetime
 import sqlite3
 import tkinter.font as tkfont
+import pyqrcode
+
+
+j = random.randint(100, 1000)
 
 spl1 = {
     "Mumbai CST": 0,
@@ -62,7 +66,7 @@ def price(v, a, v1, v2):
 
 
 def bus_number(v, a, v1, v2, p):
-    j = random.randint(100, 1000)
+    global j
     n = datetime.now()
     h = n.strftime("%H")
     s = ''
@@ -77,7 +81,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01CD1234'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, price) Values(?,?,?,?,?,?,?)',
                     ('MH01CD1234', v, j, v1, v2, a, p))
@@ -303,12 +306,19 @@ def bus_number(v, a, v1, v2, p):
 def show_entry_fields(v1, v2, a, v):
     t3 = Toplevel()
     t3.title("Ticket details")
+    global j
+    q = pyqrcode.create(j)
+    q.png("Q.png", scale='4')
+    img1 = PhotoImage(file='Q.png')
     img = PhotoImage(file='best2.png')
     f = tkfont.Font(family='Consolas', size=12)
     p = price(v, a, v1, v2)
     s = bus_number(v, a, v1, v2, p)
+    l2 = Label(t3, compound=CENTER, image=img1)
+    l2.image=img1
+    l2.grid(row=0, column=0)
     l1 = Label(t3, text=s, compound=CENTER, image=img, font=f)
     l1.image = img
-    l1.grid(row=0, column=0)
+    l1.grid(row=1, column=0)
 
 
