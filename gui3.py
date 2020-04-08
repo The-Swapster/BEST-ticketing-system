@@ -308,7 +308,7 @@ def show_entry_fields(v1, v2, a, v):
     t3.title("Ticket details")
     global j
     q = pyqrcode.create(j)
-    q.png("Q.png", scale='4')
+    q.png("Q.png", scale='8')
     img1 = PhotoImage(file='Q.png')
     img = PhotoImage(file='best2.png')
     f = tkfont.Font(family='Consolas', size=12)
