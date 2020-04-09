@@ -102,7 +102,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01XY6754'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -125,7 +124,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01MD3245'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -148,7 +146,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01AB3848'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -172,7 +169,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01BA5707'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -196,7 +192,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01RM5018'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -219,7 +214,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01UA6550'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -242,7 +236,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01SA7745'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -265,7 +258,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01ZM8199'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -288,7 +280,6 @@ def bus_number(v, a, v1, v2, p):
                 except sqlite3.IntegrityError:
                     db.c.execute("update passenger_count set count = ? where bus_number = 'MH01DG1860'",
                                  (count[0] + a,))
-                j += 1
                 db.c.execute(
                     'Insert into passenger(bus_number, route_number, ticket_id, start_stop, end_stop, number, '
                     'price) Values(?,?,?,?,?,?,?)',
@@ -314,9 +305,12 @@ def show_entry_fields(v1, v2, a, v):
     f = tkfont.Font(family='Consolas', size=12)
     p = price(v, a, v1, v2)
     s = bus_number(v, a, v1, v2, p)
-    l2 = Label(t3, compound=CENTER, image=img1)
-    l2.image=img1
-    l2.grid(row=0, column=0)
+    if s == 'Bus is full':
+        pass
+    else:
+        l2 = Label(t3, compound=CENTER, image=img1)
+        l2.image=img1
+        l2.grid(row=0, column=0)
     l1 = Label(t3, text=s, compound=CENTER, image=img, font=f)
     l1.image = img
     l1.grid(row=1, column=0)
